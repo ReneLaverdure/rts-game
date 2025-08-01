@@ -1,7 +1,5 @@
 {
   "scripts": {
-    "watch": "npx tsc -w",
-    "live": "live-server",
     "start": "npx tsc -w"
   },
   "devDependencies": {
