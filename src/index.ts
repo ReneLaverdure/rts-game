@@ -10,7 +10,7 @@ const increase = document?.querySelector<HTMLButtonElement>("#increase");
 const decrease = document?.querySelector<HTMLButtonElement>("#decrease");
 const play = document?.querySelector<HTMLButtonElement>("#play");
 
-let playing = true;
+let playing = false;
 
 let timePointer = 2;
 const TIMING = [250, 500, 1000, 1500, 2000];
@@ -34,7 +34,7 @@ function main() {
 }
 
 main();
-let gameLoop = setInterval(main, time);
+let gameLoop: number;
 
 increase?.addEventListener("click", () => {
   if (timePointer > 0) {
@@ -42,6 +42,15 @@ increase?.addEventListener("click", () => {
     timePointer--;
     time = TIMING[timePointer];
   }
+
+  if (timePointer === 0) {
+    increase.disabled = true;
+  }
+
+  if (timePointer > 0) {
+    decrease!.disabled = false;
+  }
+
   console.log(time);
   console.log(timePointer);
   main();
@@ -54,6 +63,14 @@ decrease?.addEventListener("click", () => {
     console.log("game speed DECREASE");
     timePointer++;
     time = TIMING[timePointer];
+  }
+
+  if (timePointer === TIMING.length - 1) {
+    decrease.disabled = true;
+  }
+
+  if (timePointer < TIMING.length) {
+    increase!.disabled = false;
   }
 
   console.log(time);
